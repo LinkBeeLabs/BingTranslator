@@ -9,7 +9,7 @@ setup(
 	packages = ["BingTranslator"],
 	version = '0.1',
 	description = "Micrososft Translator API V2 for Python",
-	long_description = read("README.rst"),
+	long_description = read("README.md"),
 	author = "Will Filho",
 	author_email = "dookgulliver@willfilho.com",
 	license = "LGPL",

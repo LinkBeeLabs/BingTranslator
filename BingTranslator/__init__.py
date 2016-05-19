@@ -53,7 +53,7 @@ class Translator(object):
             Format and encode dict for make authentication on microsoft 
             servers.
         """
-        format_oauth = urllib.parse.urlencode({
+        format_oauth = urllib.urlencode({
             'client_id': self._client_id,
             'client_secret': self._client_secret,
             'scope': self._url_request,
@@ -87,14 +87,14 @@ class Translator(object):
         """
             Returns one array of language supported by api for translate.
         """
-        mode_translate = TranslatorMode.LanguagesForTranslate.value
+        mode_translate = TranslatorMode.LanguagesForTranslate
         return self._get_content(None, mode_translate)
 
     def get_languages_for_speak(self):
         """
             Returns one array of language supported by api for speak.
         """
-        mode_translate = TranslatorMode.LanguagesForSpeak.value
+        mode_translate = TranslatorMode.LanguagesForSpeak
         return self._get_content(None, mode_translate)
 
     def detect_language(self, text):
@@ -106,7 +106,7 @@ class Translator(object):
                 Returns language present on text.
         """
         infos_translate = TextDetectLanguageModel(text).to_dict()
-        mode_translate = TranslatorMode.Detect.value
+        mode_translate = TranslatorMode.Detect
         return self._get_content(infos_translate, mode_translate)
 
     def detect_languages(self, texts):
@@ -121,7 +121,7 @@ class Translator(object):
         infos_translate = TextDetectLanguageModel(text_list).to_dict()
         texts_for_detect = TextUtils.change_key(infos_translate, "text",
                                                     "texts", infos_translate["text"])
-        mode_translate = TranslatorMode.DetectArray.value
+        mode_translate = TranslatorMode.DetectArray
         return self._get_content(texts_for_detect, mode_translate)
 
     def translate(self, text, to_lang, from_lang=None, 
@@ -139,7 +139,7 @@ class Translator(object):
         """
         infos_translate = TextModel(text, to_lang,
             from_lang, content_type, category).to_dict()
-        mode_translate = TranslatorMode.Translate.value
+        mode_translate = TranslatorMode.Translate
         return self._get_content(infos_translate, mode_translate)
 
 
@@ -151,7 +151,7 @@ class Translator(object):
         infos_translate = TextArrayModel(
             texts_formated, to_lang, from_lang, 
             content_type, category, uri, user, state).to_dict()
-        mode_translate = TranslatorMode.TranslateArray.value
+        mode_translate = TranslatorMode.TranslateArray
         return self._get_content(infos_translate, mode_translate)
 
     def get_translations(
@@ -162,7 +162,7 @@ class Translator(object):
             text, to_lang, max_translations, from_lang, content_type, 
             category, uri, user, state)
         infos_translate.clean_text_property()
-        mode_translate = TranslatorMode.Translations.value
+        mode_translate = TranslatorMode.Translations
         return self._get_content(infos_translate.to_dict(), mode_translate)
 
     def get_multiple_translations(
@@ -173,7 +173,7 @@ class Translator(object):
         infos_translate = TranslationsModel(
             texts_formated, to_lang, max_translations, 
             from_lang, content_type, category, uri, user, state).to_dict()
-        mode_translate = TranslatorMode.TranslationsArray.value
+        mode_translate = TranslatorMode.TranslationsArray
         return self._get_content(infos_translate, mode_translate)
 
     def speak_phrase(self, text, language, format_audio=None, option=None):
@@ -197,7 +197,7 @@ class Translator(object):
         """
         infos_speak_translate = SpeakModel(
             text, language, format_audio, option).to_dict()
-        mode_translate = TranslatorMode.SpeakMode.value
+        mode_translate = TranslatorMode.SpeakMode
         return self._get_content(infos_speak_translate, mode_translate)
 
 
